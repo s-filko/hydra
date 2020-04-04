@@ -3,12 +3,6 @@
   height: 32px;
 }
 
-.item {
-  &:not(:hover) .action {
-    display: none;
-  }
-}
-
 .users-list {
   position: relative;
   min-height: 4.438rem;
@@ -23,5 +17,11 @@
     height: 100%;
     top: 0;
     left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .item:not(:hover) .action {
+    display: none;
   }
 }
