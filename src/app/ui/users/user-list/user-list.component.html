@@ -1,0 +1,42 @@
+
+<!-- Header -->
+<div>
+  <input [(ngModel)]="searchTerm" name="searchTerm" (input)="loadUsersList()" class="form-control mr-sm-2" type="search" placeholder="Search User" aria-label="Search">
+  <div class="ml-1 mt-1">
+    <small *ngIf="users !== null"> {{users.length ? 'Users found: ' + users.length : 'Users not found :('}}</small>
+  </div>
+</div>
+
+<div class="users-list" [ngClass]="{loading: isShowSpinner}">
+  <!-- Use item -->
+  <div *ngFor="let user of users" class="media item text-muted pt-3">
+    <div class="user-pic mr-2 rounded" [style.background]="getColor(user.id)">
+    </div>
+    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <div class="d-flex">
+        <div class="flex-grow-1">
+          <strong>{{user.firstName}} {{user.lastName}}</strong>
+          <a routerLink="/users/edit/{{user.id}}" class="action ml-2">Edit</a>
+        </div>
+        <div>
+          <a routerLink="/users/list" (click)="deleteUser(user)" class="action mr-2 text-danger">Delete</a>
+        </div>
+      </div>
+      {{user.age}} years old
+    </div>
+  </div>
+
+  <!-- Spinner -->
+  <div *ngIf="isShowSpinner" class="spinner-wrapper d-flex justify-content-center align-items-center">
+    <div class="spinner-border text-info" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<div class="pt-3">
+  <a class="btn btn-sm btn-success" routerLink="/users/add" role="button">Add New User</a>
+</div>
+
